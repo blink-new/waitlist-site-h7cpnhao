@@ -1,6 +1,6 @@
 
 import { useCallback } from "react";
-import Particles from "@tsparticles/react";
+import { Particles } from "@tsparticles/react";
 import { loadSlim } from "@tsparticles/slim";
 import type { Engine } from "@tsparticles/engine";
 
@@ -15,7 +15,12 @@ export function ParticlesBackground() {
       init={particlesInit}
       className="absolute inset-0 -z-10"
       options={{
-        fpsLimit: 120,
+        background: {
+          color: {
+            value: "transparent",
+          },
+        },
+        fpsLimit: 60,
         interactivity: {
           events: {
             onHover: {
