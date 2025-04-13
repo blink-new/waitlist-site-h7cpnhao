@@ -46,13 +46,13 @@ export function SuccessPage() {
 
   if (!user) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 text-white p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-black text-white p-4">
         <ParticlesBackground />
         <div className="text-center relative z-10">
           <h1 className="text-3xl font-bold mb-4">User not found</h1>
           <p className="mb-8">We couldn't find your information. Please join the waitlist again.</p>
           <Link to="/">
-            <Button className="bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700">
+            <Button className="bg-white text-black hover:bg-white/90">
               <ArrowLeft className="mr-2 h-4 w-4" />
               Back to Home
             </Button>
@@ -63,19 +63,19 @@ export function SuccessPage() {
   }
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 text-white">
+    <div className="min-h-screen flex flex-col bg-black text-white">
       <ParticlesBackground />
       
       {/* Background blobs */}
       <GradientBlob 
-        color1="rgba(79, 70, 229, 0.15)" 
-        color2="rgba(124, 58, 237, 0.1)" 
+        color1="rgba(255, 255, 255, 0.03)" 
+        color2="rgba(255, 255, 255, 0.01)" 
         className="-right-40 top-20" 
         size="50rem"
       />
       <GradientBlob 
-        color1="rgba(236, 72, 153, 0.1)" 
-        color2="rgba(219, 39, 119, 0.15)" 
+        color1="rgba(255, 255, 255, 0.01)" 
+        color2="rgba(255, 255, 255, 0.03)" 
         className="-left-40 bottom-20" 
         size="50rem"
       />
@@ -87,13 +87,13 @@ export function SuccessPage() {
           recycle={false}
           numberOfPieces={500}
           gravity={0.1}
-          colors={['#818cf8', '#a78bfa', '#c084fc', '#e879f9', '#f472b6']}
+          colors={['#ffffff', '#f5f5f5', '#e5e5e5', '#d4d4d4', '#a3a3a3']}
         />
       )}
       
       <header className="py-6 px-4 relative z-10">
         <div className="container mx-auto">
-          <Link to="/" className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
+          <Link to="/" className="text-2xl font-bold text-white">
             LaunchWave
           </Link>
         </div>
@@ -102,16 +102,16 @@ export function SuccessPage() {
       <main className="flex-grow flex items-center justify-center p-4 relative z-10">
         <div className="max-w-2xl w-full">
           <motion.div 
-            className="bg-white/5 backdrop-blur-lg rounded-2xl p-8 border border-white/10 shadow-xl relative overflow-hidden"
+            className="bg-black/40 backdrop-blur-lg rounded-2xl p-8 border border-white/10 shadow-xl relative overflow-hidden"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
           >
             {/* Inner glow effect */}
-            <div className="absolute inset-0 bg-gradient-to-br from-indigo-500/5 via-purple-500/5 to-pink-500/5 -z-10" />
+            <div className="absolute inset-0 bg-white/5 -z-10" />
             
             <div className="text-center mb-8">
               <motion.div 
-                className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-gradient-to-r from-green-400 to-emerald-500 mb-6"
+                className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-white text-black mb-6"
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 transition={{ 
@@ -121,11 +121,11 @@ export function SuccessPage() {
                   delay: 0.2
                 }}
               >
-                <Check className="h-10 w-10 text-white" />
+                <Check className="h-10 w-10" />
               </motion.div>
               
               <motion.h1 
-                className="text-3xl md:text-4xl font-bold mb-3 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/80"
+                className="text-3xl md:text-4xl font-bold mb-3 text-white"
                 initial={{ opacity: 0, y: 10 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}

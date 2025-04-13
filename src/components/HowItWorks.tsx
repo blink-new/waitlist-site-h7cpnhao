@@ -9,21 +9,21 @@ const steps = [
     title: "Join the Waitlist",
     description: "Enter your email to secure your spot in line.",
     icon: <Mail className="h-6 w-6" />,
-    color: "bg-gradient-to-r from-indigo-500 to-indigo-600"
+    color: "bg-white text-black"
   },
   {
     id: 2,
     title: "Share with Friends",
     description: "Invite friends using your unique referral link.",
     icon: <Share className="h-6 w-6" />,
-    color: "bg-gradient-to-r from-purple-500 to-purple-600"
+    color: "bg-white text-black"
   },
   {
     id: 3,
     title: "Move Up the List",
     description: "Each referral moves you closer to the top of the waitlist.",
     icon: <TrendingUp className="h-6 w-6" />,
-    color: "bg-gradient-to-r from-pink-500 to-pink-600"
+    color: "bg-white text-black"
   }
 ];
 
@@ -34,13 +34,13 @@ export function HowItWorks() {
       
       {/* Background blobs */}
       <GradientBlob 
-        color1="rgba(79, 70, 229, 0.1)" 
-        color2="rgba(124, 58, 237, 0.05)" 
+        color1="rgba(255, 255, 255, 0.03)" 
+        color2="rgba(255, 255, 255, 0.01)" 
         className="-left-20 -top-20" 
       />
       <GradientBlob 
-        color1="rgba(236, 72, 153, 0.05)" 
-        color2="rgba(219, 39, 119, 0.1)" 
+        color1="rgba(255, 255, 255, 0.01)" 
+        color2="rgba(255, 255, 255, 0.03)" 
         className="-right-20 -bottom-20" 
         size="30rem"
       />
@@ -50,7 +50,7 @@ export function HowItWorks() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/80">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
           How It Works
         </h2>
         <p className="text-lg text-white/70 max-w-2xl mx-auto">
@@ -69,7 +69,7 @@ export function HowItWorks() {
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
           >
             <div className="relative mb-8 group">
-              <div className="absolute inset-0 rounded-full blur-xl bg-gradient-to-r from-indigo-500/30 via-purple-500/30 to-pink-500/30 group-hover:opacity-100 opacity-70 transition-opacity duration-300 scale-[1.2]" />
+              <div className="absolute inset-0 rounded-full blur-xl bg-white/10 group-hover:opacity-100 opacity-70 transition-opacity duration-300 scale-[1.2]" />
               
               <div className={`${step.color} rounded-full p-6 mb-4 shadow-lg relative z-10`}>
                 <motion.div
@@ -98,7 +98,7 @@ export function HowItWorks() {
               )}
             </div>
             
-            <h3 className="text-xl font-bold mb-3">{step.title}</h3>
+            <h3 className="text-xl font-bold mb-3 text-white">{step.title}</h3>
             <p className="text-white/70">{step.description}</p>
           </motion.div>
         ))}

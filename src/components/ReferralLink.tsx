@@ -23,6 +23,7 @@ export function ReferralLink({ referralCode }: ReferralLinkProps) {
       toast({
         title: "Copied!",
         description: "Referral link copied to clipboard",
+        variant: "success"
       });
       setTimeout(() => setCopied(false), 2000);
     } catch (err) {
@@ -45,6 +46,7 @@ export function ReferralLink({ referralCode }: ReferralLinkProps) {
         toast({
           title: "Shared successfully!",
           description: "Thanks for sharing our waitlist",
+          variant: "success"
         });
       } catch (err) {
         // User probably canceled the share

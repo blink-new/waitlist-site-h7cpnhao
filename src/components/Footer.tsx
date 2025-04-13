@@ -17,7 +17,7 @@ export function Footer() {
       <div className="container mx-auto px-4">
         <div className="flex flex-col md:flex-row justify-between items-center">
           <div className="mb-6 md:mb-0">
-            <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500 mb-2">
+            <div className="text-2xl font-bold text-white mb-2">
               LaunchWave
             </div>
             <p className="text-white/50 text-sm">

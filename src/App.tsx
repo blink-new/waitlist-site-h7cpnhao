@@ -5,6 +5,7 @@ import { HomePage } from './pages/HomePage';
 import { SuccessPage } from './pages/SuccessPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Toaster } from './components/Toaster';
 
 // Wrapper component for page transitions
 function PageTransition({ children }: { children: React.ReactNode }) {
@@ -49,6 +50,7 @@ function App() {
 
   return (
     <BrowserRouter>
+      <Toaster />
       <Routes>
         <Route path="/" element={
           <PageTransition>

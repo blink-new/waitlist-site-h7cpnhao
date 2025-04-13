@@ -80,7 +80,7 @@ export function WaitlistForm({ referralCode }: WaitlistFormProps) {
         type="submit" 
         size="lg" 
         disabled={isSubmitting}
-        className="h-14 px-8 rounded-xl bg-gradient-to-r from-indigo-600 to-purple-600 hover:from-indigo-700 hover:to-purple-700 text-white font-medium shadow-lg shadow-indigo-600/20 hover:shadow-indigo-600/40 transition-all duration-300 relative overflow-hidden group"
+        className="h-14 px-8 rounded-xl bg-white text-black hover:bg-white/90 font-medium shadow-lg shadow-white/20 hover:shadow-white/30 transition-all duration-300 relative overflow-hidden group"
       >
         <span className="relative z-10 flex items-center">
           {isSubmitting ? (
@@ -95,7 +95,6 @@ export function WaitlistForm({ referralCode }: WaitlistFormProps) {
             </>
           )}
         </span>
-        <span className="absolute inset-0 bg-gradient-to-r from-indigo-700 to-purple-700 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
       </Button>
     </motion.form>
   );

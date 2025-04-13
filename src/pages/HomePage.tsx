@@ -36,12 +36,12 @@ export function HomePage() {
   };
 
   return (
-    <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 text-white">
+    <div className="min-h-screen flex flex-col bg-black text-white">
       <ParticlesBackground />
       
       <header className={`py-6 px-4 fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-black/80 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
         <div className="container mx-auto flex justify-between items-center">
-          <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
+          <div className="text-2xl font-bold text-white">
             LaunchWave
           </div>
           
@@ -60,14 +60,14 @@ export function HomePage() {
         >
           {/* Background elements */}
           <GradientBlob 
-            color1="rgba(79, 70, 229, 0.2)" 
-            color2="rgba(124, 58, 237, 0.1)" 
+            color1="rgba(255, 255, 255, 0.03)" 
+            color2="rgba(255, 255, 255, 0.01)" 
             className="-right-40 top-20" 
             size="50rem"
           />
           <GradientBlob 
-            color1="rgba(236, 72, 153, 0.1)" 
-            color2="rgba(219, 39, 119, 0.2)" 
+            color1="rgba(255, 255, 255, 0.01)" 
+            color2="rgba(255, 255, 255, 0.03)" 
             className="-left-40 bottom-20" 
             size="50rem"
           />
@@ -85,6 +85,7 @@ export function HomePage() {
                   text="Something Amazing is Coming Soon"
                   className="text-4xl md:text-6xl font-bold leading-tight"
                   highlightWords={["Amazing"]}
+                  highlightClass="text-white"
                   delay={0.3}
                 />
               </motion.div>

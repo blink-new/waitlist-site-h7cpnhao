@@ -73,7 +73,7 @@ export function ProductFeatures() {
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/80">
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 text-white">
           Discover What's Coming
         </h2>
         <p className="text-lg text-white/70 max-w-2xl mx-auto">
@@ -91,9 +91,9 @@ export function ProductFeatures() {
             transition={{ delay: 0.1 * index }}
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
           >
-            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/5 to-purple-600/5 rounded-2xl blur-xl transform group-hover:scale-105 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+            <div className="absolute inset-0 bg-white/5 rounded-2xl blur-xl transform group-hover:scale-105 transition-all duration-300 opacity-0 group-hover:opacity-100" />
             
-            <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all relative z-10 h-full">
+            <div className="bg-black/40 backdrop-blur-md rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all relative z-10 h-full">
               <FloatingElement 
                 xMovement={5} 
                 yMovement={5} 
@@ -101,12 +101,12 @@ export function ProductFeatures() {
                 delay={index * 0.2}
                 className="mb-6"
               >
-                <div className={`inline-flex items-center justify-center p-3 rounded-xl bg-gradient-to-r ${feature.color}`}>
+                <div className="inline-flex items-center justify-center p-3 rounded-xl bg-white text-black">
                   {iconMap[feature.icon as keyof typeof iconMap]}
                 </div>
               </FloatingElement>
               
-              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+              <h3 className="text-xl font-bold mb-3 text-white">{feature.title}</h3>
               <p className="text-white/70">{feature.description}</p>
             </div>
           </motion.div>

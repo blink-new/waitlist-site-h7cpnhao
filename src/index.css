@@ -24,20 +24,7 @@
     --border: 240 5.9% 90%;
     --input: 240 5.9% 90%;
     --ring: 240 10% 3.9%;
-    --chart-1: 12 76% 61%;
-    --chart-2: 173 58% 39%;
-    --chart-3: 197 37% 24%;
-    --chart-4: 43 74% 66%;
-    --chart-5: 27 87% 67%;
     --radius: 0.5rem;
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
   
   .dark {
@@ -60,19 +47,6 @@
     --border: 240 3.7% 15.9%;
     --input: 240 3.7% 15.9%;
     --ring: 240 4.9% 83.9%;
-    --chart-1: 220 70% 50%;
-    --chart-2: 160 60% 45%;
-    --chart-3: 30 80% 55%;
-    --chart-4: 280 65% 60%;
-    --chart-5: 340 75% 55%;
-    --sidebar-background: 240 5.9% 10%;
-    --sidebar-foreground: 240 4.8% 95.9%;
-    --sidebar-primary: 224.3 76.3% 48%;
-    --sidebar-primary-foreground: 0 0% 100%;
-    --sidebar-accent: 240 3.7% 15.9%;
-    --sidebar-accent-foreground: 240 4.8% 95.9%;
-    --sidebar-border: 240 3.7% 15.9%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
   }
 }
 
@@ -96,16 +70,16 @@
   }
   
   ::-webkit-scrollbar-track {
-    background: rgba(15, 23, 42, 0.1);
+    background: rgba(0, 0, 0, 0.1);
   }
   
   ::-webkit-scrollbar-thumb {
-    background: rgba(99, 102, 241, 0.5);
+    background: rgba(255, 255, 255, 0.3);
     border-radius: 5px;
   }
   
   ::-webkit-scrollbar-thumb:hover {
-    background: rgba(99, 102, 241, 0.7);
+    background: rgba(255, 255, 255, 0.5);
   }
 }
 
@@ -155,7 +129,7 @@
 }
 
 .animate-gradient-text {
-  background: linear-gradient(90deg, #818cf8, #c084fc, #f472b6, #c084fc, #818cf8);
+  background: linear-gradient(90deg, #ffffff, #f5f5f5, #e5e5e5, #f5f5f5, #ffffff);
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
@@ -169,4 +143,61 @@
   backdrop-filter: blur(10px);
   -webkit-backdrop-filter: blur(10px);
   border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Toast animations */
+@keyframes in-right {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes in-bottom {
+  from {
+    transform: translateY(100%);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes out-right {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
+}
+
+.animate-in {
+  animation: in-right 0.3s ease;
+}
+
+.animate-out {
+  animation: out-right 0.3s ease, fade-out 0.2s ease;
+}
+
+.slide-in-from-top-full {
+  animation: in-bottom 0.3s ease;
+}
+
+.slide-out-to-right-full {
+  animation: out-right 0.3s ease;
+}
+
+.fade-out-80 {
+  animation: fade-out 0.2s ease;
 }

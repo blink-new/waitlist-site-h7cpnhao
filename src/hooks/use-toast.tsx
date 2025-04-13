@@ -1,11 +1,13 @@
 
 import { useState } from 'react';
 
+export type ToastVariant = 'default' | 'destructive' | 'success';
+
 interface Toast {
   id: string;
   title: string;
   description?: string;
-  variant?: 'default' | 'destructive';
+  variant?: ToastVariant;
 }
 
 export function useToast() {
