@@ -1,6 +1,5 @@
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
 
 interface GradientBlobProps {
   className?: string;
@@ -26,41 +25,35 @@ export function GradientBlob({
     const startX = Math.random() * 10 - 5;
     const startY = Math.random() * 10 - 5;
     
-    // Create animation timeline
-    const tl = gsap.timeline({
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0,
-    });
+    // Create animation with CSS transitions instead of GSAP
+    const blob = blobRef.current;
     
-    // Animate the blob with random movements
-    tl.to(blobRef.current, {
-      x: `${startX}%`,
-      y: `${startY}%`,
-      scale: 1 + Math.random() * 0.1,
-      borderRadius: "60% 40% 70% 30% / 50% 60% 40% 50%",
-      duration: 8,
-      ease: "sine.inOut",
-    })
-    .to(blobRef.current, {
-      x: `${startY}%`,
-      y: `${startX}%`,
-      scale: 1 - Math.random() * 0.05,
-      borderRadius: "40% 60% 30% 70% / 60% 40% 70% 30%",
-      duration: 8,
-      ease: "sine.inOut",
-    })
-    .to(blobRef.current, {
-      x: `${-startX}%`,
-      y: `${-startY}%`,
-      scale: 1 + Math.random() * 0.05,
-      borderRadius: "70% 30% 50% 50% / 30% 60% 40% 70%",
-      duration: 8,
-      ease: "sine.inOut",
-    });
+    // Set initial state
+    blob.style.transition = "transform 8s ease-in-out, border-radius 8s ease-in-out";
+    blob.style.transform = `translate(${startX}%, ${startY}%) scale(1)`;
+    blob.style.borderRadius = "60% 40% 70% 30% / 50% 60% 40% 50%";
+    
+    // Animation loop with setTimeout
+    const animate = () => {
+      // Generate new random values for each iteration
+      const newX = Math.random() * 10 - 5;
+      const newY = Math.random() * 10 - 5;
+      const newScale = 1 + Math.random() * 0.1;
+      const newBorderRadius = `${40 + Math.random() * 30}% ${60 - Math.random() * 20}% ${30 + Math.random() * 40}% ${70 - Math.random() * 40}% / ${50 + Math.random() * 10}% ${50 - Math.random() * 10}% ${50 + Math.random() * 10}% ${50 - Math.random() * 10}%`;
+      
+      // Apply new styles
+      blob.style.transform = `translate(${newX}%, ${newY}%) scale(${newScale})`;
+      blob.style.borderRadius = newBorderRadius;
+      
+      // Schedule next animation
+      setTimeout(animate, 8000);
+    };
+    
+    // Start animation loop
+    const timeoutId = setTimeout(animate, 8000);
     
     return () => {
-      tl.kill();
+      clearTimeout(timeoutId);
     };
   }, []);
   

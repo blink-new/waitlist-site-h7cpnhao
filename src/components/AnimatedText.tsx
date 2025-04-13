@@ -1,6 +1,5 @@
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
 import { cn } from "../lib/utils";
 
 interface AnimatedTextProps {
@@ -37,6 +36,8 @@ export function AnimatedText({
       wordSpan.style.display = "inline-block";
       wordSpan.style.opacity = "0";
       wordSpan.style.transform = "translateY(20px)";
+      wordSpan.style.transition = `opacity 0.5s ease, transform 0.5s ease`;
+      wordSpan.style.transitionDelay = `${delay + i * staggerDelay}s`;
       
       if (isHighlighted) {
         wordSpan.className = highlightClass;
@@ -45,18 +46,21 @@ export function AnimatedText({
       textRef.current?.appendChild(wordSpan);
     });
     
-    // Animate each word
-    gsap.to(textRef.current.children, {
-      opacity: 1,
-      y: 0,
-      stagger: staggerDelay,
-      duration: 0.5,
-      ease: "power2.out",
-      delay,
-    });
+    // Trigger animation after a small delay to ensure DOM is ready
+    setTimeout(() => {
+      if (!textRef.current) return;
+      
+      Array.from(textRef.current.children).forEach((child) => {
+        const span = child as HTMLSpanElement;
+        span.style.opacity = "1";
+        span.style.transform = "translateY(0)";
+      });
+    }, 50);
     
     return () => {
-      gsap.killTweensOf(textRef.current?.children);
+      if (textRef.current) {
+        textRef.current.innerHTML = "";
+      }
     };
   }, [text, highlightWords, highlightClass, delay, staggerDelay]);
   

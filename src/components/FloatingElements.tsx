@@ -1,6 +1,5 @@
 
 import { useEffect, useRef } from "react";
-import { gsap } from "gsap";
 import { cn } from "../lib/utils";
 
 interface FloatingElementProps {
@@ -29,28 +28,30 @@ export function FloatingElement({
     const randomX = Math.random() * xMovement - xMovement / 2;
     const randomY = Math.random() * yMovement - yMovement / 2;
     
-    // Create floating animation
-    const tl = gsap.timeline({
-      repeat: -1,
-      yoyo: true,
-      repeatDelay: 0,
-    });
+    const element = elementRef.current;
     
-    tl.to(elementRef.current, {
-      x: randomX,
-      y: randomY,
-      duration: duration,
-      ease: "sine.inOut",
-      delay: delay,
-    }).to(elementRef.current, {
-      x: -randomX,
-      y: -randomY,
-      duration: duration,
-      ease: "sine.inOut",
-    });
+    // Set initial styles
+    element.style.transition = `transform ${duration}s ease-in-out`;
+    element.style.transitionDelay = `${delay}s`;
+    element.style.transform = `translate(${randomX}px, ${randomY}px)`;
+    
+    // Animation loop with setTimeout
+    const animate = () => {
+      // Toggle between positions
+      const newX = element.style.transform.includes(`${randomX}px`) ? -randomX : randomX;
+      const newY = element.style.transform.includes(`${randomY}px`) ? -randomY : randomY;
+      
+      element.style.transform = `translate(${newX}px, ${newY}px)`;
+      
+      // Schedule next animation
+      setTimeout(animate, duration * 1000);
+    };
+    
+    // Start animation loop
+    const timeoutId = setTimeout(animate, (duration + delay) * 1000);
     
     return () => {
-      tl.kill();
+      clearTimeout(timeoutId);
     };
   }, [xMovement, yMovement, duration, delay]);
   
