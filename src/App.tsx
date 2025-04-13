@@ -17,7 +17,8 @@ function PageTransition({ children }: { children: React.ReactNode }) {
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        transition={{ duration: 0.3 }}
+        transition={{ duration: 0.4 }}
+        className="w-full h-full"
       >
         {children}
       </motion.div>
@@ -26,6 +27,26 @@ function PageTransition({ children }: { children: React.ReactNode }) {
 }
 
 function App() {
+  // Preload fonts and assets
+  useEffect(() => {
+    // Force font loading
+    document.documentElement.classList.add('font-loaded');
+    
+    // Preload images if needed
+    const preloadImages = () => {
+      const images = [
+        // Add any critical images here
+      ];
+      
+      images.forEach((image) => {
+        const img = new Image();
+        img.src = image;
+      });
+    };
+    
+    preloadImages();
+  }, []);
+
   return (
     <BrowserRouter>
       <Routes>

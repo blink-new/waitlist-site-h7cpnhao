@@ -64,7 +64,10 @@
     "@supabase/supabase-js": "latest",
     "nanoid": "latest",
     "react-confetti": "latest",
-    "react-router-dom": "latest"
+    "react-router-dom": "latest",
+    "@tsparticles/react": "latest",
+    "@tsparticles/slim": "latest",
+    "gsap": "latest"
   },
   "devDependencies": {
     "@eslint/js": "^9.21.0",

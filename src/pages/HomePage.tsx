@@ -1,17 +1,26 @@
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { useSearchParams } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import { motion, useScroll, useTransform } from 'framer-motion';
 import { WaitlistForm } from '../components/WaitlistForm';
 import { ProductFeatures } from '../components/ProductFeatures';
 import { HowItWorks } from '../components/HowItWorks';
 import { Footer } from '../components/Footer';
 import { ArrowDown } from 'lucide-react';
+import { ParticlesBackground } from '../components/ParticlesBackground';
+import { GradientBlob } from '../components/GradientBlob';
+import { FloatingElements } from '../components/FloatingElements';
+import { AnimatedText } from '../components/AnimatedText';
 
 export function HomePage() {
   const [searchParams] = useSearchParams();
   const referralCode = searchParams.get('ref') || undefined;
   const [scrolled, setScrolled] = useState(false);
+  const heroRef = useRef<HTMLDivElement>(null);
+  
+  const { scrollYProgress } = useScroll();
+  const opacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
+  const scale = useTransform(scrollYProgress, [0, 0.2], [1, 0.95]);
   
   useEffect(() => {
     const handleScroll = () => {
@@ -22,9 +31,15 @@ export function HomePage() {
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
 
+  const scrollToFeatures = () => {
+    document.getElementById('features')?.scrollIntoView({ behavior: 'smooth' });
+  };
+
   return (
     <div className="min-h-screen flex flex-col bg-gradient-to-br from-gray-900 via-indigo-950 to-gray-900 text-white">
-      <header className={`py-6 px-4 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? 'bg-black/80 backdrop-blur-md' : 'bg-transparent'}`}>
+      <ParticlesBackground />
+      
+      <header className={`py-6 px-4 fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? 'bg-black/80 backdrop-blur-md shadow-lg' : 'bg-transparent'}`}>
         <div className="container mx-auto flex justify-between items-center">
           <div className="text-2xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">
             LaunchWave
@@ -38,65 +53,92 @@ export function HomePage() {
       </header>
       
       <main className="flex-grow">
-        <section className="pt-32 pb-20 px-4 relative overflow-hidden">
+        <motion.section 
+          ref={heroRef}
+          className="min-h-screen flex items-center pt-20 pb-20 px-4 relative overflow-hidden"
+          style={{ opacity, scale }}
+        >
           {/* Background elements */}
-          <div className="absolute inset-0 overflow-hidden">
-            <div className="absolute -top-40 -right-40 w-96 h-96 bg-purple-600/20 rounded-full blur-3xl"></div>
-            <div className="absolute -bottom-40 -left-40 w-96 h-96 bg-indigo-600/20 rounded-full blur-3xl"></div>
-          </div>
+          <GradientBlob 
+            color1="rgba(79, 70, 229, 0.2)" 
+            color2="rgba(124, 58, 237, 0.1)" 
+            className="-right-40 top-20" 
+            size="50rem"
+          />
+          <GradientBlob 
+            color1="rgba(236, 72, 153, 0.1)" 
+            color2="rgba(219, 39, 119, 0.2)" 
+            className="-left-40 bottom-20" 
+            size="50rem"
+          />
+          <FloatingElements />
           
           <div className="container mx-auto relative z-10">
-            <motion.div 
-              className="text-center max-w-3xl mx-auto mb-12"
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-            >
-              <h1 className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-                Something <span className="bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 to-purple-500">Amazing</span> is Coming Soon
-              </h1>
-              <p className="text-xl text-white/70 mb-8">
+            <div className="text-center max-w-3xl mx-auto mb-12">
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5 }}
+                className="mb-6"
+              >
+                <AnimatedText
+                  text="Something Amazing is Coming Soon"
+                  className="text-4xl md:text-6xl font-bold leading-tight"
+                  highlightWords={["Amazing"]}
+                  delay={0.3}
+                />
+              </motion.div>
+              
+              <motion.p 
+                className="text-xl text-white/70 mb-10"
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5, duration: 0.5 }}
+              >
                 Join our exclusive waitlist to be among the first to experience our revolutionary product. 
                 Refer friends to move up the list and get early access.
-              </p>
+              </motion.p>
               
               <WaitlistForm referralCode={referralCode} />
               
               {referralCode && (
                 <motion.div 
-                  className="mt-4 text-sm text-white/70 bg-white/5 rounded-lg p-2 inline-block"
+                  className="mt-4 text-sm text-white/70 bg-white/5 backdrop-blur-sm rounded-lg p-3 inline-block border border-white/10"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
+                  transition={{ delay: 0.6 }}
                 >
                   You were referred by a friend! You'll both move up the waitlist.
                 </motion.div>
               )}
-            </motion.div>
+            </div>
             
             <motion.div 
               className="flex justify-center mt-16"
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
+              transition={{ delay: 0.7 }}
             >
-              <a 
-                href="#features" 
-                className="flex flex-col items-center text-white/50 hover:text-white transition-colors"
+              <button 
+                onClick={scrollToFeatures}
+                className="flex flex-col items-center text-white/50 hover:text-white transition-colors group"
               >
-                <span className="text-sm mb-2">Discover More</span>
-                <ArrowDown className="h-5 w-5 animate-bounce" />
-              </a>
+                <span className="text-sm mb-2 group-hover:transform group-hover:translate-y-1 transition-transform">Discover More</span>
+                <div className="p-2 rounded-full bg-white/5 group-hover:bg-white/10 transition-colors">
+                  <ArrowDown className="h-5 w-5 animate-bounce" />
+                </div>
+              </button>
             </motion.div>
           </div>
-        </section>
+        </motion.section>
         
-        <section id="features" className="py-16 px-4">
+        <section id="features" className="py-16 px-4 relative">
           <div className="container mx-auto">
             <ProductFeatures />
           </div>
         </section>
         
-        <section id="how-it-works" className="py-16 px-4">
+        <section id="how-it-works" className="py-16 px-4 relative">
           <div className="container mx-auto">
             <HowItWorks />
           </div>

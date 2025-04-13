@@ -9,6 +9,7 @@ import {
   Smartphone, 
   Globe 
 } from 'lucide-react';
+import { FloatingElement } from './FloatingElements';
 
 const features: ProductFeature[] = [
   {
@@ -66,13 +67,15 @@ const iconMap = {
 
 export function ProductFeatures() {
   return (
-    <div className="py-16">
+    <div className="py-16 relative">
       <motion.div 
         className="text-center mb-12"
         initial={{ opacity: 0, y: 20 }}
         animate={{ opacity: 1, y: 0 }}
       >
-        <h2 className="text-3xl font-bold mb-4">Discover What's Coming</h2>
+        <h2 className="text-3xl md:text-4xl font-bold mb-4 bg-clip-text text-transparent bg-gradient-to-r from-white via-white to-white/80">
+          Discover What's Coming
+        </h2>
         <p className="text-lg text-white/70 max-w-2xl mx-auto">
           We're building something special. Here's a sneak peek at the features you'll get access to.
         </p>
@@ -82,17 +85,30 @@ export function ProductFeatures() {
         {features.map((feature, index) => (
           <motion.div
             key={feature.id}
-            className="bg-white/5 backdrop-blur-lg rounded-xl p-6 border border-white/10 hover:border-white/20 transition-all"
+            className="relative group"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ delay: 0.1 * index }}
             whileHover={{ y: -5, transition: { duration: 0.2 } }}
           >
-            <div className={`inline-flex items-center justify-center p-3 rounded-lg bg-gradient-to-r ${feature.color} mb-4`}>
-              {iconMap[feature.icon as keyof typeof iconMap]}
+            <div className="absolute inset-0 bg-gradient-to-r from-indigo-600/5 to-purple-600/5 rounded-2xl blur-xl transform group-hover:scale-105 transition-all duration-300 opacity-0 group-hover:opacity-100" />
+            
+            <div className="bg-white/5 backdrop-blur-md rounded-2xl p-8 border border-white/10 hover:border-white/20 transition-all relative z-10 h-full">
+              <FloatingElement 
+                xMovement={5} 
+                yMovement={5} 
+                duration={3}
+                delay={index * 0.2}
+                className="mb-6"
+              >
+                <div className={`inline-flex items-center justify-center p-3 rounded-xl bg-gradient-to-r ${feature.color}`}>
+                  {iconMap[feature.icon as keyof typeof iconMap]}
+                </div>
+              </FloatingElement>
+              
+              <h3 className="text-xl font-bold mb-3">{feature.title}</h3>
+              <p className="text-white/70">{feature.description}</p>
             </div>
-            <h3 className="text-xl font-bold mb-2">{feature.title}</h3>
-            <p className="text-white/70">{feature.description}</p>
           </motion.div>
         ))}
       </div>

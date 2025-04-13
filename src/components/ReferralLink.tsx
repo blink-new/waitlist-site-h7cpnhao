@@ -61,25 +61,29 @@ export function ReferralLink({ referralCode }: ReferralLinkProps) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: 0.3 }}
     >
-      <div className="flex flex-col sm:flex-row gap-3">
-        <Input
-          value={referralLink}
-          readOnly
-          className="h-12 text-sm bg-white/10 border-white/20"
-        />
+      <div className="flex flex-col sm:flex-row gap-3 relative">
+        <div className="relative flex-grow">
+          <Input
+            value={referralLink}
+            readOnly
+            className="h-12 text-sm bg-white/5 backdrop-blur-sm border-white/10 rounded-xl pl-4 pr-4"
+            onClick={(e) => (e.target as HTMLInputElement).select()}
+          />
+          <div className="absolute inset-0 rounded-xl bg-gradient-to-r from-indigo-600/10 to-purple-600/10 -z-10 blur-sm transform scale-[1.03] opacity-70" />
+        </div>
         <Button 
           onClick={copyToClipboard} 
           variant="outline" 
           size="icon" 
-          className="h-12 w-12 border-white/20 bg-white/10 hover:bg-white/20"
+          className="h-12 w-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
         >
-          {copied ? <Check className="h-5 w-5" /> : <Copy className="h-5 w-5" />}
+          {copied ? <Check className="h-5 w-5 text-green-500" /> : <Copy className="h-5 w-5" />}
         </Button>
         <Button 
           onClick={shareLink} 
           variant="outline" 
           size="icon" 
-          className="h-12 w-12 border-white/20 bg-white/10 hover:bg-white/20"
+          className="h-12 w-12 rounded-xl border-white/10 bg-white/5 backdrop-blur-sm hover:bg-white/10 transition-all duration-300"
         >
           <Share2 className="h-5 w-5" />
         </Button>

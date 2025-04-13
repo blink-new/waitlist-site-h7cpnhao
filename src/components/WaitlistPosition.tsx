@@ -18,21 +18,32 @@ export function WaitlistPosition({ user }: WaitlistPositionProps) {
       transition={{ delay: 0.2 }}
     >
       <div className="inline-flex items-center justify-center rounded-full bg-gradient-to-r from-indigo-600/20 to-purple-600/20 p-1 mb-4">
-        <div className="rounded-full bg-black px-3 py-1 text-sm font-medium text-white">
+        <div className="rounded-full bg-black/50 backdrop-blur-md px-4 py-1.5 text-sm font-medium text-white">
           Your Position
         </div>
       </div>
       <div className="relative">
-        <div className="text-8xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-500 to-purple-600">
+        <div className="text-9xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-indigo-400 via-purple-500 to-pink-500 leading-none">
           #{adjustedPosition}
         </div>
+        <div className="absolute inset-0 blur-3xl bg-gradient-to-r from-indigo-500/10 via-purple-500/10 to-pink-500/10 -z-10 rounded-full scale-75 opacity-70" />
         {user.referralCount > 0 && (
-          <div className="absolute -top-2 -right-2 bg-green-500 text-white text-xs font-bold px-2 py-1 rounded-full">
-            -${user.referralCount}
-          </div>
+          <motion.div 
+            className="absolute -top-2 -right-2 bg-gradient-to-r from-green-500 to-emerald-500 text-white text-xs font-bold px-3 py-1.5 rounded-full shadow-lg"
+            initial={{ scale: 0 }}
+            animate={{ scale: 1 }}
+            transition={{ 
+              type: "spring", 
+              stiffness: 500, 
+              damping: 15,
+              delay: 0.5
+            }}
+          >
+            -{user.referralCount}
+          </motion.div>
         )}
       </div>
-      <p className="text-white/70 mt-2">
+      <p className="text-white/70 mt-4 max-w-xs mx-auto">
         {user.referralCount > 0 
           ? `You've moved up ${user.referralCount} ${user.referralCount === 1 ? 'position' : 'positions'} by referring friends!` 
           : 'Refer friends to move up the waitlist!'}
